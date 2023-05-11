@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const User = mongoose.model("User", {
-  username: String,
+  email: String,
+  account: {
+    username: String,
+  },
+  newsletter: Boolean,
   token: String,
   hash: String,
   salt: String,
