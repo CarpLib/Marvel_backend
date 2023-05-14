@@ -5,13 +5,13 @@ Backend développé pour l'application Marvel App.
 ## Fonctionnalités
 
 - **Authentification** : Permet aux utilisateurs de s'enregistrer et de se connecter.
-- **Gestion des utilisateurs** : Permet de créer, mettre à jour et supprimer des utilisateurs.
+- **Gestion des utilisateurs** : Permet de créer et mettre à jour des utilisateurs.
 - **Gestion des favoris** : Permet d'ajouter et de supprimer des personnages et des comics en tant que favoris pour les utilisateurs.
-- **Communication avec l'API Marvel** : Permet d'interagir avec l'API Marvel pour récupérer des informations sur les personnages et les comics.
+- **Communication avec l'API Marvel** : Permet d'interagir avec l'API Le Reacteur pour récupérer des informations sur les personnages et les comics.
 
 ## Installation
 
-1. Clonez ce dépôt : `git clone https://github.com/votre-utilisateur/marvel-app-backend.git`
+1. Clonez ce dépôt : `git clone https://github.com/CarpLib/Marvel_backend.git`
 2. Accédez au répertoire du projet : `cd marvel-app-backend`
 3. Installez les dépendances : `npm install`
 
