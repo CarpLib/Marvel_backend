@@ -4,6 +4,7 @@ const uid2 = require("uid2");
 const SHA256 = require("crypto-js/sha256");
 const encBase64 = require("crypto-js/enc-base64");
 const User = require("../models/User");
+const isAuthenticated = require("../middlewares/isAuthenticated");
 
 router.post("/signup", async (req, res) => {
   try {
@@ -29,6 +30,7 @@ router.post("/signup", async (req, res) => {
       token,
       hash,
       salt,
+      favorites: [{ comics: [], characters: [] }],
     });
 
     await newUser.save();
@@ -58,7 +60,42 @@ router.post("/login", async (req, res) => {
       account: {
         username: user.account.username,
       },
+      favorites: user.favorites,
     });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/favorites", isAuthenticated, async (req, res) => {
+  try {
+    // req.user est défini dans votre middleware isAuthenticated
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.put("/favorites", isAuthenticated, async (req, res) => {
+  try {
+    // req.user est défini dans votre middleware isAuthenticated
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Mettre à jour les favoris
+    user.favorites = req.body.favorites;
+
+    // Sauvegarder les changements dans la base de données
+    await user.save();
+
+    res.status(200).json({ message: "Favorites updated successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
